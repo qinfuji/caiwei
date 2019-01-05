@@ -1,0 +1,37 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+				http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<mirrors>
+    <mirror>
+      <id>aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </mirror>
+    <mirror>
+      <id>UK</id>
+      <name>UK Central</name>
+      <url>http://uk.maven.org/maven2</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+    <mirror>  
+      <id>repo2</id>  
+      <mirrorOf>central</mirrorOf>  
+      <name>Human Readable Name for this Mirror.</name>  
+      <url>http://repo2.maven.org/maven2</url>  
+    </mirror>
+    <mirror>      
+        <id>repo1</id>      
+        <mirrorOf>central</mirrorOf>      
+        <name>Human Readable Name for this Mirror.</name>      
+        <url>http://repo1.maven.org/maven2</url>      
+    </mirror>
+    <mirror>      
+        <id>repo</id>      
+        <mirrorOf>central</mirrorOf>      
+        <name>Human Readable Name for this Mirror.</name>      
+        <url>http://repo.maven.apache.org/maven2</url>      
+    </mirror>
+  </mirrors>
+</settings>

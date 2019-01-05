@@ -1,0 +1,13 @@
+environments:
+  dev:
+    web:
+      port: 8001
+    deploy:
+      eventLoopPoolSize: 1
+      workerPoolSize: 1
+  prod:
+    web:
+      port: 80
+    deploy:
+      eventLoopPoolSize: 10
+      workerPoolSize: 5
