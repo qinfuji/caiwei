@@ -1,6 +1,7 @@
 package com.saiwill.web.server;
 
 import com.saiwill.web.actions.RouteAction;
+import com.saiwill.web.actions.RouterActionBuild;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpVersion;
@@ -25,7 +26,10 @@ public class SpringWebVerticle extends AbstractVerticle {
     VetxWebConfiguration config;
 
     @Autowired
-    Map<String , RouteAction> actionMap;
+    Map<String, RouteAction> actionMap;
+
+    @Autowired
+    RouterActionBuild routerActionBuild;
 
     @Override
     public void start() throws Exception {
@@ -38,7 +42,7 @@ public class SpringWebVerticle extends AbstractVerticle {
         LOGGER.info("web server startd with  port :" + config.getPort());
     }
 
-    void routes(Router router){
+    void routes(Router router) {
 
         commonRoutes(router);
 
@@ -85,7 +89,6 @@ public class SpringWebVerticle extends AbstractVerticle {
             HttpVersion version = ctx.request().version();
             String remote = ctx.request().remoteAddress().host();
             String forwarded = ctx.request().getHeader("X-Forwarded-For");
-            String token = ctx.request().getParam("__token");
             long begin = System.currentTimeMillis();
             ctx.addBodyEndHandler(v -> {
                 int statusCode = ctx.response().getStatusCode();
@@ -99,9 +102,14 @@ public class SpringWebVerticle extends AbstractVerticle {
         });
     }
 
-    void actionRoutes(Router router){
+    void actionRoutes(Router router) {
         if (actionMap != null && !actionMap.isEmpty()) {
-            
+            actionMap.entrySet().stream()
+                    /*转换handler*/
+                    .forEach(entry -> {
+                        RouteAction action = entry.getValue();
+                        routerActionBuild.build(action, router);
+                    });
         }
     }
 }
