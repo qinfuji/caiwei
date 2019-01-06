@@ -23,4 +23,14 @@
             <artifactId>vertx-web</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 是否启用参考父模块说明 -->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-deploy-plugin</artifactId>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
 </project>

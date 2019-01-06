@@ -1,9 +1,0 @@
-environments:
-  dev:
-    deploy:
-      eventLoopPoolSize: 1
-      workerPoolSize: 1
-  prod:
-    deploy:
-      eventLoopPoolSize: 10
-      workerPoolSize: 5

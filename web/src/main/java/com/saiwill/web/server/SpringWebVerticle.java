@@ -1,5 +1,6 @@
 package com.saiwill.web.server;
 
+import com.saiwill.web.actions.Action;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpVersion;
@@ -20,15 +21,18 @@ public class SpringWebVerticle extends AbstractVerticle {
     private static Logger LOGGER = LoggerFactory.getLogger(SpringWebVerticle.class);
 
     @Autowired
-    WebConfiguration config;
+    VertxWebConfiguration webconfig;
+
+    @Autowired
+    Action action;
 
     @Override
     public void start() throws Exception {
         super.start();
-        int port = config.getPort();
         Router router = Router.router(vertx);
+        int port = webconfig.getPort();
         vertx.createHttpServer()
-                .requestHandler(router::accept)
+                .requestHandler(router)
                 .listen(port);
         LOGGER.info("web server startd with  port :" + port);
     }

@@ -29,3 +29,6 @@
 .vertx/
 .settings/
 /logs/
+/boot/target
+/vertx/target
+/web/target

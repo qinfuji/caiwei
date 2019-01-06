@@ -1,4 +1,4 @@
-package com.saiwill.boot;
+package com.saiwill;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
