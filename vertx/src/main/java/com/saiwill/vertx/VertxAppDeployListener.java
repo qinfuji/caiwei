@@ -29,7 +29,9 @@ public class VertxAppDeployListener implements ApplicationListener {
 
     static void deploy(ApplicationContext context) {
 
+        SpringVerticleFactory factory = context.getBean(SpringVerticleFactory.class);
         Vertx vertx = context.getBean("vertx" ,Vertx.class);
+        vertx.registerVerticleFactory(factory);
         VertxOptions vertxOptions = context.getBean(VertxOptions.class);
         Map<String, Verticle> verticleMap = context.getBeansOfType(Verticle.class);
         /*部署verticle*/

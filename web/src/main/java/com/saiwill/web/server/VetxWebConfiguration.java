@@ -5,13 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-
-@PropertySource(value = {"application-vertx-web.properties", "application.properties"})
-@ConfigurationProperties("vertx-web")
+@PropertySource(value={"application-vertx-web.properties","application.properties"})
+@ConfigurationProperties("vertx.web")
 @Configuration
 @Component
-public class VertxWebConfiguration {
-
+public class VetxWebConfiguration {
     private int port;
 
     public int getPort() {

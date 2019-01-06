@@ -1,6 +1,6 @@
 package com.saiwill.web.server;
 
-import com.saiwill.web.actions.Action;
+import com.saiwill.web.actions.RouteAction;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpVersion;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 @Component
 public class SpringWebVerticle extends AbstractVerticle {
@@ -21,24 +22,27 @@ public class SpringWebVerticle extends AbstractVerticle {
     private static Logger LOGGER = LoggerFactory.getLogger(SpringWebVerticle.class);
 
     @Autowired
-    VertxWebConfiguration webconfig;
+    VetxWebConfiguration config;
 
     @Autowired
-    Action action;
+    Map<String , RouteAction> actionMap;
 
     @Override
     public void start() throws Exception {
         super.start();
         Router router = Router.router(vertx);
-        int port = webconfig.getPort();
+        routes(router);
         vertx.createHttpServer()
                 .requestHandler(router)
-                .listen(port);
-        LOGGER.info("web server startd with  port :" + port);
+                .listen(config.getPort());
+        LOGGER.info("web server startd with  port :" + config.getPort());
     }
 
     void routes(Router router){
+
         commonRoutes(router);
+
+        actionRoutes(router);
     }
 
     /**
@@ -65,12 +69,12 @@ public class SpringWebVerticle extends AbstractVerticle {
             ctx.response().putHeader("Content-Type", "application/json;charset=utf-8");
             ctx.next();
         });
-        //todo 临时跨域
-        router.route("/content/accountDetail").handler(ctx -> {
-            ctx.response().putHeader("Access-Control-Allow-Origin", "*");
-            ctx.response().putHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-            ctx.next();
-        });
+
+//        router.route("/content/accountDetail").handler(ctx -> {
+//            ctx.response().putHeader("Access-Control-Allow-Origin", "*");
+//            ctx.response().putHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+//            ctx.next();
+//        });
 
         /*请求信息记录日志*/
         router.route().handler(ctx -> {
@@ -93,5 +97,11 @@ public class SpringWebVerticle extends AbstractVerticle {
                 ctx.next();
             });
         });
+    }
+
+    void actionRoutes(Router router){
+        if (actionMap != null && !actionMap.isEmpty()) {
+            
+        }
     }
 }
