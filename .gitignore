@@ -24,11 +24,8 @@
 /nbdist/
 /.nb-gradle/
 /.idea/
-/target/
+/**/target/
 /file-uploads/
 .vertx/
 .settings/
 /logs/
-/boot/target
-/vertx/target
-/web/target
