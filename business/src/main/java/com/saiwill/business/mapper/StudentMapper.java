@@ -2,10 +2,17 @@ package com.saiwill.business.mapper;
 
 import com.saiwill.business.entities.Student;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * @author qinfuji
+ * @date  2019/1/18
+ */
 public interface StudentMapper {
 
-     Student findById(@Param("id") Long id);
+     /**
+      * 通过id查询
+      * @param id
+      * @return
+      */
+    Student findById(@Param("id") Long id);
 }
